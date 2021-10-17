@@ -22,14 +22,6 @@ public class CustomUserDetails implements UserDetails {
     @ElementCollection
     private Set<GrantedAuthority> authorities;
 
-    private boolean accountNonExpired;
-
-    private boolean accountNonLocked;
-
-    private boolean credentialsNonExpired;
-
-    private boolean enabled;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -48,13 +40,13 @@ public class CustomUserDetails implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if(username.equals("test")){
             Set<SimpleGrantedAuthority> authoritySet = new HashSet<>();
-            authoritySet.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+            authoritySet.add(new SimpleGrantedAuthority("ADMIN"));
             this.authorities = Collections.unmodifiableSet(authoritySet);
             return Collections.unmodifiableSet(authoritySet);
         }
         else{
             Set<SimpleGrantedAuthority> authoritySet = new HashSet<>();
-            authoritySet.add(new SimpleGrantedAuthority("ROLE_USER"));
+            authoritySet.add(new SimpleGrantedAuthority("USER"));
             this.authorities = Collections.unmodifiableSet(authoritySet);
             return Collections.unmodifiableSet(authoritySet);
         }

@@ -26,20 +26,19 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception{
         httpSecurity
                 .authorizeRequests()
-                //.antMatchers("/", "index").permitAll()
-                .antMatchers("/home").hasRole("ADMIN")
+                .antMatchers("/", "index").permitAll()
+                .antMatchers("/home").hasAnyAuthority("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()
-                .formLogin();
-                /*.loginPage("/login").permitAll()
+                .formLogin()
                 .defaultSuccessUrl("/home", true)
                 .and()
                 .logout()
                     .logoutUrl("/logout")
                     .invalidateHttpSession(true)
                     .clearAuthentication(true)
-                    .deleteCookies("JSESSIONID");*/
+                    .deleteCookies("JSESSIONID");
     }
 
     @Bean

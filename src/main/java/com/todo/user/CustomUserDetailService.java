@@ -18,7 +18,7 @@ public class CustomUserDetailService implements UserDetailsService {
 
         CustomUserDetails user = userRepository.findByUsername(username);
 
-        if(username.equals("test")){
+        if(username.equals("test") && user==null){
             return createDefaultUser(username);
         }
         if (user == null) {
