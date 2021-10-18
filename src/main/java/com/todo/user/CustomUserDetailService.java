@@ -1,5 +1,6 @@
 package com.todo.user;
 
+import com.todo.utils.ToDoConstants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,7 +19,7 @@ public class CustomUserDetailService implements UserDetailsService {
 
         CustomUserDetails user = userRepository.findByUsername(username);
 
-        if(username.equals("test") && user==null){
+        if(username.equals(ToDoConstants.DEFAULT_USERNAME) && user==null){
             return createDefaultUser(username);
         }
         if (user == null) {
@@ -29,7 +30,7 @@ public class CustomUserDetailService implements UserDetailsService {
 
     private CustomUserDetails createDefaultUser(String username) {
         CustomUserDetails userAdmin = new CustomUserDetails(username, new BCryptPasswordEncoder(11)
-                                                                        .encode("pwd123"));
+                                                                        .encode(ToDoConstants.DEFAULT_PASSWORD));
         userRepository.save(userAdmin);
 
         return userAdmin;
