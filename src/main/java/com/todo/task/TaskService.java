@@ -8,5 +8,5 @@ public interface TaskService {
 
     boolean addTask(Task task);
 
-    boolean closeTask(Task task);
+    boolean closeTask(Long taskId);
 }

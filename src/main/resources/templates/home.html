@@ -36,21 +36,76 @@
     li a:hover {
       background-color: #111;
     }
+
+    table, th, td {
+      border: 1px solid white;
+    }
+    a:link, a:visited {
+      background-color: blue;
+      color: white;
+      padding: 14px 25px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    a:hover, a:active {
+      background-color: black;
+    }
   </style>
 </head>
 <body>
+
   <div id="nav">
     <ul>
-      <li><a class="/home" href="#home">Home</a></li>
+      <li><a href="/home">Home</a></li>
       <li><a href="/tasks/view-tasks">Tasks</a></li>
       <li><a href="/tasks/add-tasks">Add-Tasks</a></li>
-      <li><a href="/tasks/close-tasks">Close-Tasks</a></li>
       <li><a href="/logout">Logout</a></li>
     </ul>
   </div>
-  <div id="content">
+
+  <div id="content" align="center">
     <p>
-      <h1>UPCOMING TASKS BELOW...</h1>
+      <h2>UPCOMING TASKS BELOW...</h2>
     </p>
   </div>
+
+  <div th:switch="${taskList}" align="center">
+    <h4 th:case="null">No Tasks created yet!!</h4>
+    <div th:case="*">
+
+      <table>
+        <thead>
+        <tr>
+          <th>Check To Close</th>
+          <th>Task Id</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Status</th>
+          <th>StartDate</th>
+          <th>EndDate</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="task : ${taskList}">
+          <td>
+            <form method="post" th:action="@{/tasks/close-tasks}">
+              Close Task
+              <input type="checkbox" name="check" onclick="submit();" th:value="${task.taskId}"/>
+            </form>
+          </td>
+          <td th:text="${task.taskId}"></td>
+          <td th:text="${task.description}"></td>
+          <td th:text="${task.title}"></td>
+          <td th:text="${task.status}"></td>
+          <td th:text="${task.startDate}"></td>
+          <td th:text="${task.endDate}"></td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
 </body></html>

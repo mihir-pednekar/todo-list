@@ -36,6 +36,22 @@
     li a:hover {
       background-color: #111;
     }
+
+    table, th, td {
+      border: 1px solid white;
+    }
+    a:link, a:visited {
+      background-color: blue;
+      color: white;
+      padding: 14px 25px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    a:hover, a:active {
+      background-color: black;
+    }
   </style>
 </head>
 <body>
@@ -45,21 +61,19 @@
       <li><a href="/home">Home</a></li>
       <li><a href="/tasks/view-tasks">Tasks</a></li>
       <li><a href="/tasks/add-tasks">Add-Tasks</a></li>
-      <li><a href="/tasks/close-tasks">Close-Tasks</a></li>
       <li><a href="/logout">Logout</a></li>
     </ul>
   </div>
 
   <div id="content" align="center">
     <p>
-      <h1>Upcoming Tasks below...</h1>
+      <h2>Upcoming Tasks below...</h2>
     </p>
   </div>
 
-  <div th:switch="${tskList}" align="center">
-    <h2 th:case="null">No Tasks created yet!!</h2>
+  <div th:switch="${taskList}" align="center">
+    <h4 th:case="null">No Tasks created yet!!</h4>
     <div th:case="*">
-      <h2>Users</h2>
       <table>
         <thead>
         <tr>
@@ -72,7 +86,7 @@
         </tr>
         </thead>
         <tbody>
-          <tr th:each="task : ${tskList}">
+          <tr th:each="task : ${taskList}">
             <td th:text="${task.taskId}"></td>
             <td th:text="${task.description}"></td>
             <td th:text="${task.title}"></td>
@@ -83,6 +97,5 @@
         </tbody>
       </table>
     </div>
-    <p><a href="/tasks/add-tasks">Add a new Task</a></p>
   </div>
 </body></html>

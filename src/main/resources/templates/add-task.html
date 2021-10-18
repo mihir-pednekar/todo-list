@@ -45,7 +45,6 @@
       <li><a href="/home">Home</a></li>
       <li><a href="/tasks/view-tasks">Tasks</a></li>
       <li><a href="/tasks/add-tasks">Add-Tasks</a></li>
-      <li><a href="/tasks/close-tasks">Close-Tasks</a></li>
       <li><a href="/logout">Logout</a></li>
     </ul>
   </div>
@@ -56,11 +55,14 @@
           th:object="${task}"
           method="post">
 
-      <label for="title">title</label>
-      <input type="text" th:field="*{title}" id="title" placeholder="Name">
+      <label for="title">Title</label>
+      <input type="text" th:field="*{title}" id="title" placeholder="title">
 
-      <label for="email">Email</label>
-      <input type="text" th:field="*{email}" id="email" placeholder="Email">
+      <label for="description">Description</label>
+      <input type="text" th:field="*{description}" id="description" placeholder="description">
+
+      <label for="endDate">EndDate</label>
+      <input type="text" th:field="*{endDate}" id="endDate" placeholder="yyyy-MM-dd HH:mm:ss">
 
       <input type="submit" value="Add task">
     </form>

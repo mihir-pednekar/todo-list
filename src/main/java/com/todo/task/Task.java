@@ -1,14 +1,13 @@
 package com.todo.task;
 
+import com.todo.utils.ToDoConstants;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -22,6 +21,9 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long taskId;
 
+    @Transient
+    private boolean check;
+
     private String description;
 
     private String title;
@@ -30,5 +32,6 @@ public class Task {
 
     private LocalDateTime startDate;
 
+    @DateTimeFormat(pattern = ToDoConstants.DATE_TIME_PATTERN)
     private LocalDateTime endDate;
 }
